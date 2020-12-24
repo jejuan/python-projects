@@ -1,36 +1,88 @@
 import random
 
-while True:
-    print("Make your choice: ")
-    choice = input()
-    choice = choice.lower() #makes input lowercase
-    choices = ["rock", "paper", "scissors"]
+comp_wins = 0
+player_wins = 0
 
-    computer_choice = random.choice(choices)
 
-    print("You chose:", choice)
-
-    print("The Computer chose:", computer_choice)
-
-    if choice in choices:
-        if choice == computer_choice:
-            print("It is a tie!")
-        if choice == 'rock':
-            if computer_choice == 'paper':
-                print("You lose, sorry!")
-            elif computer_choice == 'scissors':
-                print("You win!! Hooray!!")
-        if choice == 'paper':
-            if computer_choice == 'rock':
-                print("You win!! Hooray!!")
-            elif computer_choice == 'scissors':
-                print("You lose, sorry!")
-        if choice == 'scissors':
-            if computer_choice == 'rock':
-                print("You lose, sorry!")
-            elif computer_choice == 'paper':
-                print("You win!! Hooray!!")
+def Choose_Option():
+    user_choice = input("Choose Rock, Paper or Scissors: ")
+    if user_choice in ["Rock", "rock", "r", "R"]:
+        user_choice = "r"
+    elif user_choice in ["Paper", "paper", "p", "P"]:
+        user_choice = "p"
+    elif user_choice in ["Scissors", "scissors", "s", "S"]:
+        user_choice = "s"
     else:
-        print("Invalid choice, try again")
+        print("I don't understand, try again.")
+        Choose_Option()
+    return user_choice
 
-    print()
+
+def Computer_Option():
+    comp_choice = random.randint(1, 3)
+    if comp_choice == 1:
+        comp_choice = "r"
+    elif comp_choice == 2:
+        comp_choice = "p"
+    else:
+        comp_choice = "s"
+    return comp_choice
+
+
+while True:
+    print("")
+
+    user_choice = Choose_Option()
+    comp_choice = Computer_Option()
+
+    print("")
+
+    if user_choice == "r":
+        if comp_choice == "r":
+            print("You chose rock. The computer chose rock. You tied.")
+
+        elif comp_choice == "p":
+            print("You chose rock. The computer chose paper. You lose.")
+            comp_wins += 1
+
+        elif comp_choice == "s":
+            print("You chose rock. The computer chose scissors. You win.")
+            player_wins += 1
+
+    elif user_choice == "p":
+        if comp_choice == "r":
+            print("You chose paper. The computer chose rock. You win.")
+            player_wins += 1
+
+        elif comp_choice == "p":
+            print("You chose paper. The computer chose paper. You tied.")
+
+
+        elif comp_choice == "s":
+            print("You chose paper. The computer chose scissors. You lose.")
+            comp_wins += 1
+
+    elif user_choice == "s":
+        if comp_choice == "r":
+            print("You chose scissors. The computer chose rock. You lose.")
+            comp_wins += 1
+
+        elif comp_choice == "p":
+            print("You chose scissors. The computer chose paper. You win.")
+            player_wins += 1
+
+        elif comp_choice == "s":
+            print("You chose scissors. The computer chose scissors. You tied.")
+
+    print("")
+    print("Player wins: " + str(player_wins))
+    print("Computer wins: " + str(comp_wins))
+    print("")
+
+    user_choice = input("Do you want to play again? (y/n)")
+    if user_choice in ["Y", "y", "yes", "Yes"]:
+        pass
+    elif user_choice in ["N", "n", "no", "No"]:
+        break
+    else:
+        break
