@@ -1,3 +1,4 @@
+# Connect 4 w/ AI
 import numpy as np
 import random
 import pygame
